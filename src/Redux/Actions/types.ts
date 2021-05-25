@@ -6,5 +6,6 @@ export const DIVIDE: string = 'DIVIDE';         //割り算
 
 export type Action = {
     type: string,
+    data: number
 }
 

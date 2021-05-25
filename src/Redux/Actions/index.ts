@@ -1,18 +1,37 @@
 import * as actionTypes from './types'
 
 
-export const onPlusClick = () => ({
-    type: actionTypes.PLUS,
-});
+/**
+ * 
+ * 
+ * @param value 
+ * @returns 
+ */
 
-export const onMinusClick = () => ({
-    type: actionTypes.MINUS,
-});
+export const onPlusClick = (value: number): actionTypes.Action => {
+    return {
+        type: actionTypes.PLUS,
+        data: value
+    }
+};
 
-export const onMultiplyClick = () => ({
-    type: actionTypes.MULTPLY,
-});
+export const onMinusClick = (value: number): actionTypes.Action => {
+    return {
+        type: actionTypes.MINUS,
+        data: value
+    }
+};
 
-export const onDivideClick = () => ({
-    type: actionTypes.DIVIDE,
-});
+export const onMultiplyClick = (value: number): actionTypes.Action => {
+    return {
+        type: actionTypes.MULTPLY,
+        data: value
+    }
+};
+
+export const onDivideClick = (value: number): actionTypes.Action => {
+    return {
+        type: actionTypes.DIVIDE,
+        data: value
+    }
+};
