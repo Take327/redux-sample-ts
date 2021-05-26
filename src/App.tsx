@@ -1,29 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 import { connect } from 'react-redux'
-import store from './Redux/Store'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import * as actionCreator from './Redux/Actions'
 
 const App = (props: any) => {
-
-  console.log(props);
-  const { currentValue, clickCount } = props;
   const dispatch = useDispatch();
+
+  const handlePlusButton = (value: number) => {
+    dispatch(actionCreator.onPlusClick(value));
+  };
+
+  const handleMinusButton = (value: number) => {
+    dispatch(actionCreator.onMinusClick(value));
+  };
+
+  const handleMultplyButton = (value: number) => {
+    dispatch(actionCreator.onMultiplyClick(value));
+  }
+
+  const handleDivideButton = (value: number) => {
+    dispatch(actionCreator.onDivideClick(value));
+  }
+
+
+  const [inputValue, setInputValue] = useState<number>(0)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(Number(e.target.value))
+  }
 
   return (
     <div className="App">
-      計算:<input type="number" /><button>＋</button><button>ー</button><button>×</button><button>÷</button>合計:{props.resultValue}
+      計算:<input type="number" onChange={handleChange} />
+      <button onClick={() => handlePlusButton(inputValue)}>＋</button>
+      <button onClick={() => handleMinusButton(inputValue)}>ー</button>
+      <button onClick={() => handleMultplyButton(inputValue)}>×</button>
+      <button onClick={() => handleDivideButton(inputValue)}>÷</button>
+      合計:{props.resultValue}
+      test:{inputValue}
     </div>
   );
 }
 
-const mapStateToProps = (state:any) => {
-  console.log(state.calculator.resultValue);
+const mapStateToProps = (state: any) => {
   return state.calculator
 };
 
-const mapDispatchToProps = (dispatch:any) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
 
   };

@@ -1,7 +1,7 @@
 import * as actionTypes from '../Actions/types'
 
 const initialAppState: { resultValue: number } = {
-    resultValue: 99,
+    resultValue: 0,
 };
 
 const calculator = (state = initialAppState, action: actionTypes.Action): { resultValue: number } => {
