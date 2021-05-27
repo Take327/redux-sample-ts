@@ -1,28 +1,12 @@
 import React, { useState } from 'react';
 import './App.css';
 import { connect } from 'react-redux'
-import { useDispatch } from "react-redux";
 import * as actionCreator from './Redux/Actions'
+import { Dispatch } from 'redux'
 
-const App = (props: any) => {
-  const dispatch = useDispatch();
+const App: React.FC = (props:any) => {
 
-  const handlePlusButton = (value: number) => {
-    dispatch(actionCreator.onPlusClick(value));
-  };
-
-  const handleMinusButton = (value: number) => {
-    dispatch(actionCreator.onMinusClick(value));
-  };
-
-  const handleMultplyButton = (value: number) => {
-    dispatch(actionCreator.onMultiplyClick(value));
-  }
-
-  const handleDivideButton = (value: number) => {
-    dispatch(actionCreator.onDivideClick(value));
-  }
-
+  console.log(props.calculator.resultValue)
 
   const [inputValue, setInputValue] = useState<number>(0)
 
@@ -33,24 +17,45 @@ const App = (props: any) => {
   return (
     <div className="App">
       計算:<input type="number" onChange={handleChange} />
-      <button onClick={() => handlePlusButton(inputValue)}>＋</button>
-      <button onClick={() => handleMinusButton(inputValue)}>ー</button>
-      <button onClick={() => handleMultplyButton(inputValue)}>×</button>
-      <button onClick={() => handleDivideButton(inputValue)}>÷</button>
-      合計:{props.resultValue}
+      <button onClick={() => props.actions.handlePlusButton(inputValue)}>＋</button>
+      <button onClick={() => props.actions.handleMinusButton(inputValue)}>ー</button>
+      <button onClick={() => props.actions.handleMultplyButton(inputValue)}>×</button>
+      <button onClick={() => props.actions.handleDivideButton(inputValue)}>÷</button>
+      合計:{props.calculator.resultValue}
       test:{inputValue}
     </div>
   );
 }
 
-const mapStateToProps = (state: any) => {
-  return state.calculator
+
+type StateProps = {
+  calculator: { resultValue: number };
+}
+
+type DispatchProps = {
+  actions: {
+    handlePlusButton: Function,
+    handleMinusButton: Function,
+    handleMultplyButton: Function,
+    handleDivideButton: Function
+  }
+}
+
+const mapStateToProps = (state: { calculator: number }) => {
+  return state;
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   return {
-
+    actions: {
+      handlePlusButton: (value: number) => dispatch(actionCreator.onPlusClick(value)),
+      handleMinusButton: (value: number) => dispatch(actionCreator.onMinusClick(value)),
+      handleMultplyButton: (value: number) => dispatch(actionCreator.onMultiplyClick(value)),
+      handleDivideButton: (value: number) => dispatch(actionCreator.onMultiplyClick(value))
+    }
   };
 };
+
+type Props = StateProps & DispatchProps
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
