@@ -4,9 +4,8 @@ import { connect } from 'react-redux'
 import * as actionCreator from './Redux/Actions'
 import { Dispatch } from 'redux'
 
-const App: React.FC = (props:any) => {
-
-  console.log(props.calculator.resultValue)
+const App: React.FC<Props> = ({ calculator, actions }) => {
+  console.log(calculator.resultValue)
 
   const [inputValue, setInputValue] = useState<number>(0)
 
@@ -16,12 +15,12 @@ const App: React.FC = (props:any) => {
 
   return (
     <div className="App">
-      計算:<input type="number" onChange={handleChange} />
-      <button onClick={() => props.actions.handlePlusButton(inputValue)}>＋</button>
-      <button onClick={() => props.actions.handleMinusButton(inputValue)}>ー</button>
-      <button onClick={() => props.actions.handleMultplyButton(inputValue)}>×</button>
-      <button onClick={() => props.actions.handleDivideButton(inputValue)}>÷</button>
-      合計:{props.calculator.resultValue}
+      計算:<input type="number" onChange={handleChange} value={inputValue} />
+      <button onClick={() => actions.handlePlusButton(inputValue)}>＋</button>
+      <button onClick={() => actions.handleMinusButton(inputValue)}>ー</button>
+      <button onClick={() => actions.handleMultplyButton(inputValue)}>×</button>
+      <button onClick={() => actions.handleDivideButton(inputValue)}>÷</button>
+      合計:{calculator.resultValue}
       test:{inputValue}
     </div>
   );
@@ -41,7 +40,8 @@ type DispatchProps = {
   }
 }
 
-const mapStateToProps = (state: { calculator: number }) => {
+const mapStateToProps = (state: StateProps): StateProps => {
+  console.log('state:', state)
   return state;
 };
 
