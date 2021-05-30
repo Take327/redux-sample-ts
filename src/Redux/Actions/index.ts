@@ -1,5 +1,5 @@
 import * as actionTypes from './types'
-
+import { Dispatch } from 'redux'
 
 /**
  * 
@@ -35,3 +35,11 @@ export const onDivideClick = (value: number): actionTypes.Action => {
         data: value
     }
 };
+
+export const onAddAddressClick =async (dispatch: Dispatch, value: string) => {
+    await fetch(`https://openapi.city.shizuoka.jp/opendataapi/servicepoint/roadRegulation`)
+    dispatch({
+        type: actionTypes.ADD_ADDRESS,
+        data: value
+    })
+}

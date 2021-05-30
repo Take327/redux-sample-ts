@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import * as actionCreator from './Redux/Actions'
 import { Dispatch } from 'redux'
+import AddressList from './AddressList'
+import { State } from './Redux/Types'
+
 
 type StateProps = {
-  calculator: { resultValue: number };
-}
+  resultValue: number
+};
+
 
 type DispatchProps = {
   actions: {
@@ -23,8 +27,8 @@ type Props = StateProps & DispatchProps
  * @param state 
  * @returns 
  */
-const mapStateToProps = (state: StateProps): StateProps => {
-  return state;
+const mapStateToProps = (state: State): StateProps => {
+  return state.calculator;
 };
 
 /**
@@ -36,10 +40,13 @@ const mapStateToProps = (state: StateProps): StateProps => {
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   return {
     actions: {
-      handlePlusButton: (value: number) => dispatch(actionCreator.onPlusClick(value)),
+      handlePlusButton: (value: number) => {
+        console.log('handlePlusButton')
+        dispatch(actionCreator.onPlusClick(value))
+      },
       handleMinusButton: (value: number) => dispatch(actionCreator.onMinusClick(value)),
       handleMultplyButton: (value: number) => dispatch(actionCreator.onMultiplyClick(value)),
-      handleDivideButton: (value: number) => dispatch(actionCreator.onMultiplyClick(value))
+      handleDivideButton: (value: number) => dispatch(actionCreator.onDivideClick(value))
     }
   };
 };
@@ -59,15 +66,18 @@ const App: React.FC<Props> = (props: Props) => {
   }
 
   return (
-    <div className="App">
-      計算:<input type="number" onChange={handleChange} value={inputValue} />
-      <button onClick={() => props.actions.handlePlusButton(inputValue)}>＋</button>
-      <button onClick={() => props.actions.handleMinusButton(inputValue)}>ー</button>
-      <button onClick={() => props.actions.handleMultplyButton(inputValue)}>×</button>
-      <button onClick={() => props.actions.handleDivideButton(inputValue)}>÷</button>
-      合計:{props.calculator.resultValue}
-      test:{inputValue}
-    </div>
+    <>
+      <div className="App">
+        計算:<input type="number" onChange={handleChange} />
+        <button onClick={() => props.actions.handlePlusButton(inputValue)}>＋</button>
+        <button onClick={() => props.actions.handleMinusButton(inputValue)}>ー</button>
+        <button onClick={() => props.actions.handleMultplyButton(inputValue)}>×</button>
+        <button onClick={() => props.actions.handleDivideButton(inputValue)}>÷</button>
+        合計:{props.resultValue}
+        test:{inputValue}
+      </div>
+      <AddressList />
+    </>
   );
 }
 
