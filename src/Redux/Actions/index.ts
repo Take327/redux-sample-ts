@@ -36,10 +36,23 @@ export const onDivideClick = (value: number): actionTypes.Action => {
     }
 };
 
-export const onAddAddressClick =async (dispatch: Dispatch, value: string) => {
+export const onAddAddressClick = async (dispatch: Dispatch, value: string) => {
+
+    let test: string = 'a'
+
+    const setTest = () => {
+        setTimeout(() => {
+            test = 'b'
+        }, 200)
+    }
+
+    await setTest()
+
+    //検討中。。。。
+
     await fetch(`https://openapi.city.shizuoka.jp/opendataapi/servicepoint/roadRegulation`)
     dispatch({
         type: actionTypes.ADD_ADDRESS,
-        data: value
+        data: test
     })
 }
