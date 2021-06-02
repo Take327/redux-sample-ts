@@ -14,6 +14,7 @@ const addressList = (state = initialAppState, action: actionTypes.AddressAction)
             })
             newAddressList.push(action.data)
             return {
+                ...state,
                 resultValue: newAddressList
             };
     }

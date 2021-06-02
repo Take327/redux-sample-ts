@@ -37,13 +37,13 @@ export const onDivideClick = (value: number): actionTypes.Action => {
     }
 };
 
-export const onAddAddressClick =async (dispatch: Dispatch, value: string) => {
+export const onAddAddressClick = async (dispatch: Dispatch, value: string) => {
 
-    await fetch('https://github.co.jp/').then((res)=>{
-        dispatch({
-            type: actionTypes.ADD_ADDRESS,
-            data: '1番'
-        })
+    const res = await fetch('https://github.co.jp/');
+
+    dispatch({
+        type: actionTypes.ADD_ADDRESS,
+        data: '1番'
     })
 
     //検討中。。。。
