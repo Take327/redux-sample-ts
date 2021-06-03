@@ -7,4 +7,8 @@ export type AddressListState = {
     addressList: { resultValue: string[] }
 }
 
-export type State = CalculatorState & AddressListState;
+export type textListState = {
+    textReducer: { resultValue: string[] }
+}
+
+export type State = CalculatorState & AddressListState & textListState;
