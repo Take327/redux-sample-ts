@@ -1,11 +1,13 @@
 import { addTextAction } from './actions'
 import { Dispatch } from 'redux'
 
-export const addText = () => {
+export const addText = (inputUserText: string) => {
     return async (dispatch: Dispatch) => {
-        const response = await fetch('https://api.github.com/users/Take327').then(res => res.json())
+        const response = await fetch(`https://api.github.com/users/${inputUserText}`).then(res => res.json());
         const userName = response.login;
 
-        dispatch(addTextAction(userName))
+        if (userName) {
+            dispatch(addTextAction(userName))
+        }
     }
 }

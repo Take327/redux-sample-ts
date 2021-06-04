@@ -3,6 +3,21 @@
 <https://note.kiriukun.com/entry/20200517-react-redux-class-component-and-functional-component-and-hooks-example#repos>
 <https://qiita.com/NeGI1009/items/382b54106a79944652a3>
 
+# 環境構築
+## ReactとTypescriptをインストール
+```
+npx create-react-app [プロジェクト名] --typescript
+```
+## Reduxをインストール
+```
+npm install redux react-redux
+npm install --save-dev @types/react-redux
+```
+## redux-thunkをインストール
+```
+npm install --save redux-thunk
+npm install --save-dev @types/redux-thunk
+```
 
 # Redux手順
 

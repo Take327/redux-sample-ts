@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
-import * as actionCreator from './Redux/Actions'
+import * as actionCreator from './Redux/calculator/actions'
 import { Dispatch } from 'redux'
 import AddressList from './AddressList'
 import { State } from './Redux/Types'
@@ -9,7 +9,6 @@ import { State } from './Redux/Types'
 type StateProps = {
   resultValue: number
 };
-
 
 type DispatchProps = {
   actions: {
@@ -28,7 +27,8 @@ type Props = StateProps & DispatchProps
  * @returns 
  */
 const mapStateToProps = (state: State): StateProps => {
-  return state.calculator;
+  console.log(state);
+  return state.calculatorReducer;
 };
 
 /**
@@ -41,17 +41,14 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
   return {
     actions: {
       handlePlusButton: (value: number) => {
-        console.log('handlePlusButton')
-        dispatch(actionCreator.onPlusClick(value))
+        dispatch(actionCreator.plusActionCreator(value))
       },
-      handleMinusButton: (value: number) => dispatch(actionCreator.onMinusClick(value)),
-      handleMultplyButton: (value: number) => dispatch(actionCreator.onMultiplyClick(value)),
-      handleDivideButton: (value: number) => dispatch(actionCreator.onDivideClick(value))
+      handleMinusButton: (value: number) => dispatch(actionCreator.minusActionCreator(value)),
+      handleMultplyButton: (value: number) => dispatch(actionCreator.multiplyActionCreator(value)),
+      handleDivideButton: (value: number) => dispatch(actionCreator.divideActionCreator(value))
     }
   };
 };
-
-
 
 /**
  * mapStateToPropsとmapDispatchToPropsの戻り値をPropsとして受け取る。

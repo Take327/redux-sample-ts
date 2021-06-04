@@ -1,12 +1,10 @@
 import { combineReducers, } from 'redux';
-import calculator from './calculator';
-import addressList from './addressList'
 import textReducer from '../textlist/reducers'
+import calculatorReducer from '../calculator/reducers'
 
 const reducer = combineReducers({
-    addressList,
-    calculator,
-    textReducer
+    textReducer,
+    calculatorReducer
 });
 
 export default reducer;

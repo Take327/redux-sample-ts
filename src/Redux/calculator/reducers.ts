@@ -4,7 +4,7 @@ const initialAppState: { resultValue: number } = {
     resultValue: 0,
 };
 
-const calculator = (state = initialAppState, action: actionTypes.Action): { resultValue: number } => {
+const calculatorReducer = (state = initialAppState, action: actionTypes.Action): { resultValue: number } => {
 
     switch (action.type) {
         case actionTypes.PLUS:
@@ -31,4 +31,4 @@ const calculator = (state = initialAppState, action: actionTypes.Action): { resu
     }
 }
 
-export default calculator;
+export default calculatorReducer;
