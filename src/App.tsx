@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as actionCreator from './Redux/calculator/actions'
 import { Dispatch } from 'redux'
 import AddressList from './AddressList'
-import { State } from './Redux/Types'
+import { State } from './Redux/Store/types'
 
 
 type StateProps = {
@@ -28,7 +28,7 @@ type Props = StateProps & DispatchProps
  */
 const mapStateToProps = (state: State): StateProps => {
   console.log(state);
-  return state.calculatorReducer;
+  return state.calculator;
 };
 
 /**

@@ -1,10 +1,7 @@
 import * as actionTypes from './types'
+import initialState from '../Store/initialState'
 
-const initialAppState: { resultValue: number } = {
-    resultValue: 0,
-};
-
-const calculatorReducer = (state = initialAppState, action: actionTypes.Action): { resultValue: number } => {
+const calculatorReducer = (state = initialState.calculator, action: actionTypes.Action): { resultValue: number } => {
 
     switch (action.type) {
         case actionTypes.PLUS:

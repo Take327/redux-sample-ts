@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { addText } from './Redux/textlist/operations'
-import { State } from './Redux/Types'
+import { State } from './Redux/Store/types'
 
 const AddressList: React.FC = () => {
 
@@ -16,7 +16,7 @@ const AddressList: React.FC = () => {
         <div>
             <input type="text" onChange={handleChange} /><button onClick={() => { dispatch(addText(inputValue)) }}>追加</button>
             <ul>
-                {selector.textReducer.resultValue.map((value, index) => { return <li key={index}>{value}</li> })}
+                {selector.textlist.resultValue.map((value, index) => { return <li key={index}>{value}</li> })}
             </ul>
         </div>
     )

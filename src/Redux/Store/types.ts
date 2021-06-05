@@ -1,9 +1,9 @@
 export type CalculatorState = {
-    calculatorReducer: { resultValue: number }
+    calculator: { resultValue: number }
 }
 
 export type textListState = {
-    textReducer: { resultValue: string[] }
+    textlist: { resultValue: string[] }
 }
 
 export type State = CalculatorState & textListState;
