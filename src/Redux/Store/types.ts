@@ -1,9 +1,9 @@
-export type CalculatorState = {
-    calculator: { resultValue: number }
-}
+export type CalculatorState = { resultValue: number }
 
-export type textListState = {
-    textlist: { resultValue: string[] }
-}
+export type textListState = { resultValue: string[] }
 
-export type State = CalculatorState & textListState;
+export type State =
+    {
+        calculator: CalculatorState,
+        textlist: textListState
+    }
