@@ -4,10 +4,21 @@ import { Dispatch } from 'redux'
 import { State, CalculatorState } from '../Redux/Store/types'
 import * as actionCreator from '../Redux/calculator/actions'
 
+//-------------------------------------------------------------------
 type StateProps = {
     state: CalculatorState
 }
+/**
+ * stateがmapStateToPropsの引数で渡される。
+ * returnで戻す値がPropsとしてコンポーネントに渡される。
+ * @param state 
+ * @returns 
+ */
+const mapStateToProps = (state: State): StateProps => {
+    return { state: state.calculator };
+};
 
+//-------------------------------------------------------------------
 type DispatchProps = {
     dispatchActions: {
         onPlusAction: Function,
@@ -16,16 +27,11 @@ type DispatchProps = {
         onDivideAction: Function
     }
 }
-
 /**
- * Reducerの戻り値がmapStateToPropsの引数で渡される。
- * @param state 
- * @returns 
+ * 引数にdispatchを持つ関数
+ * returnで戻す関数がPropsとしてコンポーネントに渡されるのでその関数をコンポーネント内で実行しdispatchする。
+ * @param dispatch 
  */
-const mapStateToProps = (state: State): StateProps => {
-    return { state: state.calculator };
-};
-
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
     return {
         dispatchActions: {
@@ -37,11 +43,15 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
     };
 };
 
+//-------------------------------------------------------------------
+
+/**
+ * Propsの型を作成する。
+ *
+ */
 type PropsFromRedux = ConnectedProps<InferableComponentEnhancerWithProps<StateProps & DispatchProps, {}>>
 
 const Calsulator: React.FC<PropsFromRedux> = ({ state, dispatchActions }) => {
-    console.log(connect(mapStateToProps, mapDispatchToProps))
-
     const [inputValue, setInputValue] = useState<number>(0)
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(Number(e.target.value))

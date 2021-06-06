@@ -8,9 +8,7 @@ const AddressList: React.FC = () => {
 
     const [inputValue, setInputValue] = useState<string>('');
     const dispatch = useDispatch()
-    const selector = useSelector((state: State) => state)
-
-    console.log(gettextList(selector))
+    const selector = useSelector((state: State) => { return state })
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value)
@@ -19,7 +17,7 @@ const AddressList: React.FC = () => {
         <div>
             <input type="text" onChange={handleChange} /><button onClick={() => { dispatch(addText(inputValue)) }}>追加</button>
             <ul>
-                {selector.textlist.resultValue.map((value, index) => { return <li key={index}>{value}</li> })}
+                {gettextList(selector).map((value, index) => { return <li key={index}>{value}</li> })}
             </ul>
         </div>
     )
