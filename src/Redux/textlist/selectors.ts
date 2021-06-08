@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { State } from '../Store/types'
+import { State, textListState } from '../Store/types'
 
 /**
  * stateを引数に受け取り、任意のStateの値を返却する関数
@@ -14,5 +14,5 @@ const textListSelector = (state: State) => { return state.textlist };
  */
 export const gettextList = createSelector(
     [textListSelector],
-    (textlist) => { return textlist.resultValue }
+    (textlist:textListState) => { return textlist.resultValue }
 );

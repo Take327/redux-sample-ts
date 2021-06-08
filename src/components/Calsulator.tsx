@@ -4,7 +4,14 @@ import { Dispatch } from 'redux'
 import { State, CalculatorState } from '../Redux/Store/types'
 import * as actionCreator from '../Redux/calculator/actions'
 
-//-------------------------------------------------------------------
+/**
+ * このコンポーネントはconnectを使用してReduxと接続するコンポーネントです。
+ * 結論としてはHooksを使用しStateとDispatchを取得したほうが楽です。
+ * このコンポーネントはconnectの使用方法の確認用に残しています。
+ */
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------
 type StateProps = {
     state: CalculatorState
 }
@@ -18,7 +25,7 @@ const mapStateToProps = (state: State): StateProps => {
     return { state: state.calculator };
 };
 
-//-------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------------------
 type DispatchProps = {
     dispatchActions: {
         onPlusAction: Function,
@@ -43,14 +50,24 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => {
     };
 };
 
-//-------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------------------
 
 /**
  * Propsの型を作成する。
- *
+ * 代用の記載方法としていかがある。
+ * const connector = connect(mapStateToProps, mapDispatchToProps);
+ * type PropsFromRedux = ConnectedProps<typeof connector>;
+ * 
+ * 上記記載方法だとconnectでオブジェクトを作成しその型でPropsFromRedux型を作成する。
  */
 type PropsFromRedux = ConnectedProps<InferableComponentEnhancerWithProps<StateProps & DispatchProps, {}>>
 
+
+/**
+ * Props型は上記でConnectedPropsを使用し作成したタイプを使用する必要がある。
+ * @param param0 
+ * @returns 
+ */
 const Calsulator: React.FC<PropsFromRedux> = ({ state, dispatchActions }) => {
     const [inputValue, setInputValue] = useState<number>(0)
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
