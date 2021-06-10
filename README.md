@@ -231,10 +231,69 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 # re-ducksパターン
 ## フォルダ構成
-以下のようにreducerごとにフォルダをわけ、
-├── textlist
-│   ├── actions.ts
-│   ├── reducers.ts
-│   ├── operations.ts
-│   ├── selectors.ts
-│   └── types.ts
+以下のようにreducerごとにフォルダを以下のように分ける。  
+textlist  
+  ├── actions.ts  
+  ├── reducers.ts  
+  ├── operations.ts  
+  ├── selectors.ts  
+  └── types.ts  
+
+## operations
+コンポーネント側でdispatchの引数として実行する関数を作成する。  
+戻り値にアクションオブジェクトを返す。
+戻り値に非同期関数を渡すことも可能。  
+※redux-thunkをミドルウェアとしてstoreに渡す必要がある。
+
+```Javascript
+import { addTextAction } from './actions'
+
+export const addText = (inputUserText: string) => {
+    return async (dispatch: Dispatch) => {
+        const response = await fetch(`https://api.github.com/users/${inputUserText}`).then(res => res.json());
+        const userName = response.login;
+
+        if (userName) {
+            dispatch(addTextAction(userName))
+        }
+    }
+}
+```
+### コンポーネント側
+```Javascript
+import { addText } from '../Redux/textlist/operations'
+import { useDispatch } from 'react-redux'
+〜〜〜
+const dispatch = useDispatch()
+〜〜〜
+<button onClick={() => { dispatch(addText(inputValue)) }}>追加</button>
+```
+
+## selectors
+reselectをインストールする。
+```
+npm install reselect
+```
+stateから値を取得するselectorをcreateSelectorで作成する。
+第一引数で配列型でstateを受け取りstate内のオブジェクトを返す関数を設定する。
+第二引数に第一引数の戻り値を引数に受け取り最終的に戻したい値を戻り値に設定する。
+```javascript
+export const gettextList = createSelector(
+    [(state: State) => { return state.textlist }],
+    (textlist:textListState) => { return textlist.resultValue }
+);
+```
+### コンポーネント側
+useSelectorはstateを引数に受け取りstate内の任意のオブジェクトを戻すコールバック関数を指定する。
+なお、ここではgettextListがstateを引数に受け取る関数を第一引数としているので、戻り値はstateのままにする。
+```javascript
+import { useSelector } from 'react-redux'
+import { gettextList } from '../Redux/textlist/selectors'
+〜〜〜
+const selector = useSelector((state: State) => { return state })
+〜〜〜
+<ul>
+  {gettextList(selector).map((value, index) => { return <li key={index}>{value}</li> })}
+</ul>
+```
+

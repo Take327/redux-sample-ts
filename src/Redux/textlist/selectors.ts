@@ -13,6 +13,6 @@ const textListSelector = (state: State) => { return state.textlist };
  * 第二引数に第一引数関数の戻り値から最終的な戻り値を指定する関数を記述する。
  */
 export const gettextList = createSelector(
-    [textListSelector],
+    [(state: State) => { return state.textlist }],
     (textlist:textListState) => { return textlist.resultValue }
 );
