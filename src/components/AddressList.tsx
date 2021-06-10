@@ -22,8 +22,8 @@ const AddressList: React.FC = () => {
     const dispatch = useDispatch()
     /**
      * 
-     * 
-     * 
+     * useSelectorはStateを引数とするコールバック関数を引数にセットする。
+     * ここで作成したselectorオブジェクトをselectorsの引数として渡す
      * 
      */
     const selector = useSelector((state: State) => { return state })

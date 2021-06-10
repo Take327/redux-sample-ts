@@ -228,4 +228,13 @@ import { connect } from 'react-redux'
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 ```
 
-# これで終わり！
+
+# re-ducksパターン
+## フォルダ構成
+以下のようにreducerごとにフォルダをわけ、
+├── textlist
+│   ├── actions.ts
+│   ├── reducers.ts
+│   ├── operations.ts
+│   ├── selectors.ts
+│   └── types.ts
